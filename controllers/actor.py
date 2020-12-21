@@ -52,18 +52,9 @@ def add_actor():
     """
     data = get_request_data()
     ### YOUR CODE HERE ###
-    all_values = True
-    for i in ACTOR_FIELDS:
-        if i not in data.keys() and i != 'id':
-            all_values = False
-    if all_values:
+
+    if all(key in data.keys() for key in ACTOR_FIELDS[1:]):
     # use this for 200 response code
-        if 'id' in data.keys():
-            try:
-                row_id = int(data['id'])
-            except:
-                err = 'Id must be integer'
-                return make_response(jsonify(error=err), 400)
             
         try:
             date = dt.strptime(data['date_of_birth'], '%d.%m.%Y').date()
