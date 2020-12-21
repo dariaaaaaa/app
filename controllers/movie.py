@@ -49,11 +49,8 @@ def add_movie():
     """
     data = get_request_data()
     ### YOUR CODE HERE ###
-    all_values = True
-    for i in MOVIE_FIELDS:
-        if i not in data.keys() and i != 'id':
-            all_values = False
-    if all_values:
+
+    if all(key in data.keys() for key in MOVIE_FIELDS[1:]):
     # use this for 200 response code
         if 'id' in data.keys():
             try:
