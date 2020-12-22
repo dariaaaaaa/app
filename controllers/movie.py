@@ -171,7 +171,7 @@ def movie_add_relation():
     
         rel_obj = Actor.query.get(relation_row_id)
         
-        if rel_obl is None:
+        if rel_obj is None:
             err = 'Record with such id does not exist (actor)'
             return make_response(jsonify(error=err), 400)
     # use this for 200 response code
