@@ -88,18 +88,19 @@ def update_actor():
     """
     data = get_request_data()
     ### YOUR CODE HERE ###
-    if 'id' in data.keys():
+    if 'id' in data.keys() and all(key in ACTOR_FIELDS for key in data.keys()):
         
         try:
             row_id = int(data['id'])
+            del data['id']
         except:
             err = 'Id must be integer'
             return make_response(jsonify(error=err), 400)
         
         if 'date_of_birth' in data.keys():
             try:
-                date = dt.strptime(data['date_of_birth'], DATE_FORMAT).date()
-       #         data['date_of_birth'] = date
+                data['date_of_birth'] = dt.strptime(data['date_of_birth'], '%d.%m.%Y').date()
+                
             except:
                 err = 'Incorrect date format'
                 return make_response(jsonify(error=err), 400)
@@ -123,7 +124,7 @@ def update_actor():
         return make_response(jsonify(upd_actor), 200)
     
     else:
-        err = 'No id specified'
+        err = 'Not valid data'
         return make_response(jsonify(error=err), 400)
         
             
