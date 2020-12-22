@@ -89,7 +89,7 @@ def update_movie():
     """
     data = get_request_data()
     ### YOUR CODE HERE ###
-    if 'id' in data.keys() and all(key in ACTOR_FIELDS for key in data.keys()):
+    if 'id' in data.keys() and all(key in MOVIE_FIELDS for key in data.keys()):
         
         try:
             row_id = int(data['id'])
