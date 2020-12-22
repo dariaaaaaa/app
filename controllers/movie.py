@@ -89,18 +89,18 @@ def update_movie():
     """
     data = get_request_data()
     ### YOUR CODE HERE ###
-    if 'id' in data.keys():
+    if 'id' in data.keys() and all(key in ACTOR_FIELDS for key in data.keys()):
         
         try:
             row_id = int(data['id'])
+            del data['id']
         except:
             err = 'Id must be integer'
             return make_response(jsonify(error=err), 400)
         
         if 'year' in data.keys():
             try:
-                year = int(data['year'])
-       #         data['year'] = year
+                data['year'] = int(data['year'])
             except:
                 err = 'Incorrect year format'
                 return make_response(jsonify(error=err), 400)
